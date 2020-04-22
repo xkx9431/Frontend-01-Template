@@ -157,3 +157,63 @@ function cat_all_num(source_str){
     ```
 
 3. 写一个正则表达式，匹配所有的字符串直接量，单引号和双引号
+答案参考 winter 课件。
+详细解释
+
+### StringLiteral
+StringLiteral ::
+" DoubleStringCharactersopt "
+' SingleStringCharactersopt '
+
+其中以 `"` 为例
+具体需要，从底向上。
+
+
+
+    DoubleStringCharacters ::  => /"(?:[^"\n\\\r\u2028\u2029])|\\(?:['"\\bfnrtv\n\r\u2028\u2029]|\r\n)|\\x[0-9a-fA-F]{2}|\\u[0-9a-fA-F]{4}|\\[^0-9ux'"\\bfntv\n\\\r\u2028\u2029])*"/
+        DoubleStringCharacter DoubleStringCharactersopt
+
+    DoubleStringCharacter ::  =>
+        SourceCharacter but not one of " or \ or LineTerminator => [^"\n\\\r\u2028\u2029]
+        <LS> => \u2028
+        <PS>  => \u2029
+        \ EscapeSequence => \\(?:['"\\bfnrtv\n\r\u2028\u2029]|\r\n)
+        LineContinuation
+
+    LineContinuation ::   => \\(?:[\\bfnrtv\u2028\u2029]|\n\r)
+        \ LineTerminatorSequence
+
+    EscapeSequence ::   => ['"\\bfnrtv]{1}|[^0-9xu'"\\bfnrtv\n\\r\u2028\u2029]| \\x[0-9a-fA-f]{2}|\\u[0-9a-fA-f]{4}
+        CharacterEscapeSequence
+        0 [lookahead ∉ DecimalDigit]  //  ？ 
+        HexEscapeSequence
+        UnicodeEscapeSequence
+
+    CharacterEscapeSequence :: ['"\\bfnrtv]{1}|[^0-9xu'"\\bfnrtv\n\\r\u2028\u2029]
+        SingleEscapeCharacter
+        NonEscapeCharacter
+    SingleEscapeCharacter :: **one of** =>['"\\bfnrtv]
+        ' " \ b f n r t v
+
+    NonEscapeCharacter :: [^0-9xu'"\\bfnrtv\n\\r\u2028\u2029]
+        SourceCharacter but not one of EscapeCharacter or LineTerminator
+    EscapeCharacter :: =>[0-9xu'"\\bfnrtv]
+        SingleEscapeCharacter
+        DecimalDigit
+        x
+        u
+    HexEscapeSequence :: \\x[0-9a-fA-f]{2}
+    x HexDigit HexDigit
+    UnicodeEscapeSequence :: \\u[0-9a-fA-f]{4}
+        u Hex4Digits
+        u{ CodePoint }
+    Hex4Digits :: =>[0-9a-fA-f]{4}
+    HexDigit HexDigit HexDigit HexDigit
+
+    LineTerminator :: =>[\n\\r\u2028\u2029]
+        <LF>
+        <CR>
+        <LS>
+        <PS>
+
+
