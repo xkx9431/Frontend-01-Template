@@ -80,8 +80,9 @@ value, e. Finally, the remaining 23 bits represent the fraction value.
 
 ### 课后练习
 
-1. 写一个正则表达式 匹配所有 Number 直接量
-   答案参考:./reg_cat_all_num.js  (week02\reg_cat_all_num.js)
+#### 1. 写一个正则表达式 匹配所有 Number 直接量
+
+答案参考:./reg_cat_all_num.js  (week02\reg_cat_all_num.js)
 ```javascript
    // Copyright (c) 2020 Xu Kaixuan
 
@@ -124,9 +125,10 @@ function cat_all_num(source_str){
 // console.log(/^((0X)|(0x))?[0-9a-fA-F]+$/.test('32aF'))
    ```
 
-2. 写一个 UTF-8 Encoding 的函数
-    参考：week02\utf_8_encode.js
-    ```javascript
+#### 2. 写一个 UTF-8 Encoding 的函数
+参考：week02\utf_8_encode.js
+
+```javascript
     function strToBuffer(str){
     var n = str.length,
         idx = 0,
@@ -154,20 +156,24 @@ function cat_all_num(source_str){
     }
     return utf8;
 }
-    ```
+```
 
-3. 写一个正则表达式，匹配所有的字符串直接量，单引号和双引号
-答案参考 winter 课件。
-详细解释
 
-### StringLiteral
+#### 3. 写一个正则表达式，匹配所有的字符串直接量，单引号和双引号
+
+
+答案参考 winter 课件。详细解释如下
+
+<br>
+
+**StringLiteral**
+
 StringLiteral ::
 " DoubleStringCharactersopt "
 ' SingleStringCharactersopt '
 
 其中以 `"` 为例
 具体需要，从底向上。
-
 
 
     DoubleStringCharacters ::  => /"(?:[^"\n\\\r\u2028\u2029])|\\(?:['"\\bfnrtv\n\r\u2028\u2029]|\r\n)|\\x[0-9a-fA-F]{2}|\\u[0-9a-fA-F]{4}|\\[^0-9ux'"\\bfntv\n\\\r\u2028\u2029])*"/
