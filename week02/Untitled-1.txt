@@ -1,0 +1,16 @@
+//block
+
+<script>
+for(let  i = 0; i <128;i++){
+  cosole.log(Srting.fromCharCode(i))
+}
+</script>
+
+
+<script>
+var a = 0.1;
+var b = 0.2;
+
+</script>
+
+
