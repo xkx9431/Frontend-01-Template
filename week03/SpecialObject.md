@@ -59,4 +59,5 @@
 ModuleNamespaceCreate(module,exports)
 
 7. Immutable Prototype Exotic Objects
-有这些特性[[SetPrototypeOf]] SetImmutablePrototype
+[[SetPrototypeOf]] 
+SetImmutablePrototype
