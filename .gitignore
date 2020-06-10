@@ -1,3 +1,5 @@
 .DS_Store
 .idea
 msg.md
+others
+.gitignore
