@@ -36,21 +36,34 @@
     [0,0,0]
   ]
 
+  let color =1;
+
   function show(){
     let board = document.getElementById("board");
+    board.innerHTML = "";
     for(let i = 0; i<3; i++){
       for(let j =0; j< 3; j++){
         let cell = document.createElement("div");
         cell.classList.add("cell")
-        cell.innerHTML = 
+        cell.innerText = 
         pattern[i][j] == 2 ? "X":
         pattern[i][j] == 1 ? "O":
         "";
+        cell.addEventListener("click",()=>move(i,j));
         board.appendChild(cell);
       }
     }
   }
   show();
+
+  function move(x,y){
+    if(pattern[x][y]!==0){
+      return
+    }
+    color = 3- color; 
+    pattern[x][y] =color;
+    show();
+  }
 
 </script>
 </html>
