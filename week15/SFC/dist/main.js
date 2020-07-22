@@ -90,11 +90,11 @@
 /*!***********************!*\
   !*** ./carousel.view ***!
   \***********************/
-/*! no exports provided */
+/*! exports provided: Carousel */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _create__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./create */ \"./create.js\");\n\n\nclass Carousel {\n  render(){\n    return Object(_create__WEBPACK_IMPORTED_MODULE_0__[\"createElement\"])(\"template\",{\"type\":\"startTag\",\"tagName\":\"template\"}, \"\\r\\n\\r\\n\");\n  }\n  setAttribute(name, value) { //attribute\n    this[name] =  value\n  }\n  mountTo(parent){\n    parent.appendChild(this.root);\n  }\n}\n  \n\n//# sourceURL=webpack:///./carousel.view?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"Carousel\", function() { return Carousel; });\n/* harmony import */ var _create__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./create */ \"./create.js\");\n\n\nclass Carousel {\n  render(){\n    return Object(_create__WEBPACK_IMPORTED_MODULE_0__[\"createElement\"])(\"template\",{\"type\":\"startTag\",\"tagName\":\"template\"}, \"\\r\\n    \",Object(_create__WEBPACK_IMPORTED_MODULE_0__[\"createElement\"])(\"div\",{\"type\":\"startTag\",\"tagName\":\"div\"}, \"\\r\\n        \",Object(_create__WEBPACK_IMPORTED_MODULE_0__[\"createElement\"])(\"img\",{\"type\":\"startTag\",\"tagName\":\"img\",\"isSelfClosing\":true}, ),\"\\r\\n    \"),\"\\r\\n\");\n  }\n  setAttribute(name, value) { //attribute\n    this[name] =  value\n  }\n  mountTo(parent){\n    this.render().mountTo(parent)\n  }\n}\n  \n\n//# sourceURL=webpack:///./carousel.view?");
 
 /***/ }),
 

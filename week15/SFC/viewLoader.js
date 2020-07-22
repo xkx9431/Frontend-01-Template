@@ -33,7 +33,7 @@ module.exports = function(source,map){
 
   let res =  `
 import {createElement,Wrapper,Text} from './create'
-class Carousel {
+export class Carousel {
   render(){
     return ${visit(template)};
   }
@@ -41,7 +41,7 @@ class Carousel {
     this[name] =  value
   }
   mountTo(parent){
-    parent.appendChild(this.root);
+    this.render().mountTo(parent)
   }
 }
   `;
