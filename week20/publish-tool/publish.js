@@ -1,35 +1,45 @@
 const http = require('http')
 const querystring = require('querystring')
-
-
-
-const postData = querystring.stringify({
-  'content': " hello world 123 xkx"
-})
-
+const archiver = require('archiver')
 const fs = require('fs')
 
-const options = {
-  host: 'localhost',
-  port : 8081,
-  path: '/?filename=x.html',
-  method:'GET',
-  headers:{
-    'Content-Type': 'application/x-www-form-urlencoded',
-    'Content-Length':Buffer.byteLength(postData)
-  }
-};
+let filename = './price.png'
+let packname = "./package"
 
-const req = http.request(options, (res)=>{
-  console.log( `STATUS:${res.statusCode}`);
-  console.log( `STATUS:${JSON.stringify(res.headers)}`);
+let archive = archiver('zip',{
+  zlib:{level: 9 }
 });
+archive.directory(packname,false)
 
-req.on('error',(e)=>{
-  console.log( `error: ${e.message}`)
-})
 
-let readStream = fs.createReadStream('./price.png')
-readStream.pipe(req);
-req.write(postData);
-req.end();
+archive.finalize();
+
+// fs.stat(filename,(err,stat)=>{
+//   console.log(stat);
+  const options = {
+    host: 'localhost',
+    port : 8080,
+    path: '/?filename=package.zip',
+    method:'POST',
+    headers:{
+      'Content-Type': 'application/octet-stream',
+    }
+  };
+
+  const req = http.request(options, (res)=>{
+    console.log( `STATUS:${res.statusCode}`);
+    console.log( `STATUS:${JSON.stringify(res.headers)}`);
+  });
+
+  req.on('error',(e)=>{
+    console.log( `error: ${e.message}`)
+  })
+
+  archive.pipe(req)
+  archive.on('end',()=>{
+    console.log('arch end');
+    req.end();
+  })
+
+
+// })
